@@ -5,14 +5,22 @@
     com que as informações do gato estejam disponíveis fora da função;
   - Abaixo da função "getCatInfo", exiba no console a seguinte mensagem:
 
-  "NOME_DO_GATO é um gato COR_DO_GATO de IDADE_DO_GATO anos."
+  "${getCatInfo()[0]} é um gato ${getCatInfo()[2]} de ${getCatInfo()[1]} anos."
 */
 
 const getCatInfo = () => {
-  const name = 'Marcos'
-  let age = 3
-  const color = 'Cinza'
-}
+    const name = 'Marcos';
+    let age = 3;
+    const color = 'Cinza';
+
+    return { name, age, color }; // sort-hand proprietaries names, para return {name: name, age: age, color:color}
+};
+
+const { name, age, color } = getCatInfo(); // destructuring assigner de objeto, já que getCatInfo() retorna um objeto
+
+// O destructuring de array é feito fazendo a correspondência pela posição, já o de objetos é feito pela correspondência do nome das propriedades
+
+console.log(`${name} é um gato ${age} de ${color} anos.`);
 
 /*
   02
@@ -23,16 +31,20 @@ const getCatInfo = () => {
 */
 
 const external = () => {
-  const movie = 'Parasite'
+    const movie = 'Parasite';
 
-  const internal = () => {
-    const extraInternal = () => {
-      console.log(movie.toUpperCase())
-    }
-  }
-}
+    const internal = () => {
+        const extraInternal = () => {
+            console.log(movie.toUpperCase());
+        };
 
-external()
+        extraInternal(); // essa
+    };
+
+    internal(); // essa
+};
+
+external();
 
 /*
   03
@@ -43,7 +55,11 @@ external()
   Dica: procure pelo método reverse, no MDN.
 */
 
-let randomNumbers = [3, 2, 1]
+let randomNumbers = [3, 2, 1];
+
+randomNumbers.reverse(); // evitar executar um método destrutivo dentro de um console.log, e sim executar o método numa linha e depois em outra linha o console.log
+
+console.log(randomNumbers); // método destrutivo, vai mudar o array original
 
 /*
   04
@@ -54,10 +70,17 @@ let randomNumbers = [3, 2, 1]
 */
 
 let crazyArray = [
-  { prop1: '1', prop2: '2' },
-  function getMessage () { return 'hi' },
-  [ 5, 96, 53  ]
-]
+    { prop1: '1', prop2: '2' },
+    function getMessage() {
+        return 'hi';
+    },
+    [5, 96, 53],
+];
+
+const firstArrayItemRemoved = crazyArray.shift(); // método destrutivo, vai mudar o array original
+
+console.log(firstArrayItemRemoved); // retorna qual o item que foi removido, similar ao pop()
+console.log(crazyArray); // resposta do exercício
 
 /*
   05
@@ -69,12 +92,18 @@ let crazyArray = [
 */
 
 const dogs = [
-  { name: 'Olivia', age: 3, gender: 'Female', breed: 'Maltês' },
-  { name: 'Zé', age: 2, gender: 'Male', breed: 'Pug' },
-  { name: 'Jade', age: 4, gender: 'Female', breed: 'Shiba inu' },
-  { name: 'Zequinha', age: 7, gender: 'Male', breed: 'Poodle' },
-  { name: 'Xica', age: 6, gender: 'Female', breed: 'Chihuahua' }
-]
+    { name: 'Olivia', age: 3, gender: 'Female', breed: 'Maltês' },
+    { name: 'Zé', age: 2, gender: 'Male', breed: 'Pug' },
+    { name: 'Jade', age: 4, gender: 'Female', breed: 'Shiba inu' },
+    { name: 'Zequinha', age: 7, gender: 'Male', breed: 'Poodle' },
+    { name: 'Xica', age: 6, gender: 'Female', breed: 'Chihuahua' },
+];
+
+let name2 = 'Zequinha';
+
+const findDog = dog => dog.name === name2;
+
+console.log(dogs.find(findDog));
 
 /*
   06
@@ -108,6 +137,10 @@ const dogs = [
   </section>
 */
 
+const title = document.querySelector('.main-title');
+
+console.log(title);
+
 /*
   07
 
@@ -115,3 +148,7 @@ const dogs = [
     página, através da classe deles;
   - Exiba esse NodeList no console.
 */
+
+const secondaryTitles = document.querySelectorAll('.secondary-title');
+
+console.log(secondaryTitles);

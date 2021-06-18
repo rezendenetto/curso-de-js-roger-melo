@@ -5,6 +5,8 @@
   - Ela deve ter um escopo global.
 */
 
+const name = 'Rezende'; // raiz do documento, escopo global
+
 /*
   02
 
@@ -18,6 +20,15 @@
     defined" será exibido no console;
   - Você sabe por que isso aconteceu?
 */
+
+const logAge = () => {
+    let age = 36;
+    console.log(age);
+};
+
+logAge();
+
+// console.log(age); // vai gerar um erro, age is not defined, é devido ao escopo da age ser um escopo de função que é restrito tanto pra var, let e const
 
 /*
   03
@@ -37,11 +48,37 @@
       "O NOME_DO_CARRO está disponível nas cores COR_01, COR_02 e COR_03".
 */
 
+const car = {
+    name: 'Gol',
+    brand: 'Volkswagen',
+    color: ['preto', 'branco', 'amarelo'],
+    isRunning: false,
+    run() {
+        this.isRunning = true;
+        return `O ${this.name} está em movimento`;
+    },
+    stop() {
+        this.isRunning = false;
+        return `O ${this.name} está parado`;
+    },
+    getColorsMessage() {
+        const lastItem = this.color[this.color.length - 1];
+        const colors = this.color
+            .join(', ')
+            .replace(`, ${lastItem}`, ` e ${lastItem}`);
+
+        return `O ${this.name} está disponível nas cores ${colors}`;
+    },
+};
+
 /*
   04
 
   - Faça o carro andar e exiba no console se ele realmente está em movimento.
 */
+
+console.log(car.run());
+console.log(car.isRunning === true);
 
 /*
   05
@@ -49,11 +86,16 @@
   - Faça o carro parar e exiba no console se ele realmente está parado.
 */
 
+console.log(car.stop());
+console.log(car.isRunning === false);
+
 /*
   06
 
   - Exiba, no console, a mensagem com as cores do carro.
 */
+
+console.log(car.getColorsMessage());
 
 /*
   07
@@ -61,3 +103,5 @@
   - Exiba, no console, a mensagem "O carro é um MARCA_DO_CARRO NOME_DO_CARRO";
   - Utilize a notação de colchetes para acessar as propriedades do carro.
 */
+
+console.log(`O carro é um ${car['brand']} ${car['name']}`);

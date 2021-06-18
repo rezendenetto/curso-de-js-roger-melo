@@ -5,7 +5,9 @@
     maiúsculas.
 */
 
+const h1 = document.querySelector('h1');
 
+h1.innerText = h1.innerText.toUpperCase();
 
 /*
   02
@@ -14,7 +16,15 @@
   - Cada número deve estar dentro de uma <li> com a classe "number".
 */
 
-const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
+const numbers = [53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55];
+const ul = document.querySelector('.numbers');
+
+// função de callback
+const insertNumberIntoUl = number => {
+    ul.innerHTML += `<li class='number'>${number}</li>`;
+};
+
+numbers.forEach(insertNumberIntoUl); // desacoplar a função de callback do forEach
 
 /*
   03
@@ -24,7 +34,36 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
     - Se o número é ímpar, exiba-o na cor "pink".
 */
 
+// Dica: quebrar o problema em varias etapas menores
 
+const lis = document.querySelectorAll('.number');
+
+// função de callback
+const changeLiColor = li => {
+    console.log(typeof li);
+
+    const isEvenNumber = Number(li.innerText) % 2 === 0;
+    const isOddNumber = Number(li.innerText) % 2 !== 0;
+
+    if (isEvenNumber) {
+        li.style.color = 'lightblue';
+    }
+
+    if (isOddNumber) {
+        li.style.color = 'pink';
+    }
+
+    // outra forma de resolver, já que estamos dentro de função, usar o return
+
+    // if (isEvenNumber) {
+    //     li.style.color = 'lightblue';
+    //     return;
+    // }
+
+    // li.style.color = 'pink';
+};
+
+lis.forEach(changeLiColor); // desacoplar a função de callback do forEach
 
 /*
   04
@@ -34,7 +73,10 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
   P.s: a classe "body-background" já está declarada no style.css.
 */
 
+// const body = document.querySelector('body');
+const body = document.body;
 
+body.classList.add('body-background');
 
 /*
   05
@@ -44,7 +86,12 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
     do link do index.html.
 */
 
+const link = document.querySelector('a');
 
+link.setAttribute(
+    'href',
+    'https://github.com/roger-melo-treinamentos/curso-de-js-roger-melo'
+);
 
 /*
   06
@@ -52,7 +99,7 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
   - Exiba o novo valor do atributo href do link no console.
 */
 
-
+console.log(link.getAttribute('href'));
 
 /*
   07
@@ -61,7 +108,7 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
     manipuladas via JS no h1.
 */
 
-
+console.log(h1.style);
 
 /*
   08
@@ -69,7 +116,7 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
   - Remova a classe "body-background", do elemento body.
 */
 
-
+body.classList.remove('body-background');
 
 /*
   09
@@ -77,3 +124,5 @@ const numbers = [ 53, 24, 3, 8, 1, 6, 57, 80, 77, 98, 55 ]
   - Se o link da página possuir uma classe "link", remova-a;
   - Não utilize o método remove() para fazer isso.
 */
+
+link.classList.toggle('link');

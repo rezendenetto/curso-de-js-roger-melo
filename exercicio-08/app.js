@@ -7,6 +7,12 @@
   - Exiba o resultado no console, sem inserir um console.log() dentro da função.
 */
 
+function multiply(firstNumber = 0, secondNumber = 0) {
+    return firstNumber * secondNumber;
+}
+
+console.log(multiply(5, 9));
+
 /*
   02
 
@@ -14,6 +20,12 @@
     **function expression** que retorne o resultado da **divisão** entre esses  
     2 números.
 */
+
+const divide = function (firstNumber = 0, secondNumber = 0) {
+    return firstNumber / secondNumber;
+};
+
+console.log(divide(25, 2));
 
 /*
   03
@@ -28,6 +40,14 @@
   "Esta é a Xª vez que essa string é exibida."
 */
 
+const log = function (value = 'digite uma mensagem') {
+    console.log(value);
+};
+
+for (let i = 1; i <= 7; i++) {
+    log(`Esta é a ${i}ª vez que essa string é exibida.`);
+}
+
 /*
   04
 
@@ -39,7 +59,38 @@
     função.
 */
 
-const millennialWords = ['lol', 'yolo', 'troll', 'stalkear', 'selfie', 'influencer', 'crush', 'fitness', 'hater', 'bae', 'random', 'kawaii', 'outfit', 'mood', 'fail']
+const millennialWords = [
+    'lol',
+    'yolo',
+    'troll',
+    'stalkear',
+    'selfie',
+    'influencer',
+    'crush',
+    'fitness',
+    'hater',
+    'bae',
+    'random',
+    'kawaii',
+    'outfit',
+    'mood',
+    'fail',
+];
+
+const transformeToUpperCase = function (array = []) {
+    let newArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const wordsInUpperCase = array[i].toUpperCase();
+        newArray.push(wordsInUpperCase);
+    }
+
+    return newArray;
+};
+
+const millennialInUpperCase = transformeToUpperCase(millennialWords);
+
+console.log(millennialInUpperCase);
 
 /*
   05
@@ -52,7 +103,29 @@ const millennialWords = ['lol', 'yolo', 'troll', 'stalkear', 'selfie', 'influenc
   "O array "randomNumbers" possui XX números, sendo XX positivos e XX negativos."
 */
 
-const randomNumbers = [-2, 93, 34, -1, 1, 93, 11, -7, 47, -3]
+const randomNumbers = [-2, 93, 34, -1, 1, 93, 11, -7, 47, -3];
+
+let positiveNumberCounter = 0;
+let negativeNumberCounter = 0;
+
+const isPositive = function (number = 0) {
+    return number > 0;
+};
+
+for (let i = 0; i < randomNumbers.length; i++) {
+    const number = randomNumbers[i];
+    const isPositiveNumber = isPositive(number);
+
+    if (isPositiveNumber) {
+        positiveNumberCounter++;
+    } else {
+        negativeNumberCounter++;
+    }
+}
+
+console.log(
+    `O array "randomNumbers" possui ${randomNumbers.length} números, sendo ${positiveNumberCounter} positivos e ${negativeNumberCounter} negativos.`
+);
 
 /*
   06
@@ -64,7 +137,40 @@ const randomNumbers = [-2, 93, 34, -1, 1, 93, 11, -7, 47, -3]
     função.
 */
 
-// getOddNumbers([83, 52, 31, 73, 98, 37, 61, 56, 12, 24, 35, 3, 34, 80, 42])
+const getOddNumbers = function (array = []) {
+    let newArray = [];
+
+    for (let i = 0; i < array.length; i++) {
+        const number = array[i];
+        const isOddNumber = number % 2 !== 0;
+
+        if (isOddNumber) {
+            newArray.push(number);
+        }
+    }
+
+    return newArray;
+};
+
+const oddNumbers = getOddNumbers([
+    83,
+    52,
+    31,
+    73,
+    98,
+    37,
+    61,
+    56,
+    12,
+    24,
+    35,
+    3,
+    34,
+    80,
+    42,
+]);
+
+console.log(oddNumbers);
 
 /*
   07
@@ -73,32 +179,96 @@ const randomNumbers = [-2, 93, 34, -1, 1, 93, 11, -7, 47, -3]
 */
 
 const functions = [
-  function () { return 'Plymouth' },
-  function () { return 'é' },
-  function () { return 'uma' },
-  function () { return 'cidade' },
-  function () { return 'fantasma' },
-  function () { return 'localizada' },
-  function () { return 'na' },
-  function () { return 'ilha' },
-  function () { return 'de' },
-  function () { return 'Montserrat,' },
-  function () { return 'um' },
-  function () { return 'território' },
-  function () { return 'ultramarino' },
-  function () { return 'do' },
-  function () { return 'Reino' },
-  function () { return 'Unido' },
-  function () { return 'localizado' },
-  function () { return 'na' },
-  function () { return 'cadeia' },
-  function () { return 'de' },
-  function () { return 'Ilhas' },
-  function () { return 'de' },
-  function () { return 'Sotavento' },
-  function () { return 'nas' },
-  function () { return 'Pequenas' },
-  function () { return 'Antilhas,' },
-  function () { return 'Índias' },
-  function () { return 'Ocidentais.' }
-]
+    function () {
+        return 'Plymouth';
+    },
+    function () {
+        return 'é';
+    },
+    function () {
+        return 'uma';
+    },
+    function () {
+        return 'cidade';
+    },
+    function () {
+        return 'fantasma';
+    },
+    function () {
+        return 'localizada';
+    },
+    function () {
+        return 'na';
+    },
+    function () {
+        return 'ilha';
+    },
+    function () {
+        return 'de';
+    },
+    function () {
+        return 'Montserrat,';
+    },
+    function () {
+        return 'um';
+    },
+    function () {
+        return 'território';
+    },
+    function () {
+        return 'ultramarino';
+    },
+    function () {
+        return 'do';
+    },
+    function () {
+        return 'Reino';
+    },
+    function () {
+        return 'Unido';
+    },
+    function () {
+        return 'localizado';
+    },
+    function () {
+        return 'na';
+    },
+    function () {
+        return 'cadeia';
+    },
+    function () {
+        return 'de';
+    },
+    function () {
+        return 'Ilhas';
+    },
+    function () {
+        return 'de';
+    },
+    function () {
+        return 'Sotavento';
+    },
+    function () {
+        return 'nas';
+    },
+    function () {
+        return 'Pequenas';
+    },
+    function () {
+        return 'Antilhas,';
+    },
+    function () {
+        return 'Índias';
+    },
+    function () {
+        return 'Ocidentais.';
+    },
+];
+
+let sentence = '';
+
+functions.forEach(item => {
+    sentence += `${item()} `;
+});
+
+console.log(sentence);

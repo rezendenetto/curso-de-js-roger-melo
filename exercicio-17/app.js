@@ -4,6 +4,46 @@
   - No envio do form, faça com que a página não seja recarregada.
 */
 
+const form = document.querySelector('form');
+
+const clearInput = () => {
+    input.value = '';
+    input.focus();
+};
+
+const logMessage = message => {
+    console.log(message);
+    clearInput();
+};
+
+const handleSubmit = event => {
+    event.preventDefault(); // exercício 01
+
+    const input = event.target.input; // no caso input é o id da tag input
+    console.log('exercício 02: ', input);
+
+    const inputUsernameRegex = /.{7,}/; // exercício 06
+    const isAValidValueInput = inputUsernameRegex.test(form.input.value);
+
+    if (isAValidValueInput) {
+        console.log('exercício 06: O valor inserido no input é válido =)');
+    } else {
+        console.log('exercício 06: Valor inválido =(');
+    }
+
+    const inputUsernameRegex2 = /^[a-zA-Z0-9]{7,11}$/; // exercício 07, atenção para o uso do ^ $, caso contrario pode dar match no meio do conjunto de caracteres mesmo que nem todos os caracteres atendam ao padrão
+    const isAValidValueInput2 = inputUsernameRegex2.test(form.input.value);
+
+    if (isAValidValueInput2) {
+        logMessage('exercício 07: O valor inserido no input é válido =)');
+        return;
+    }
+
+    logMessage('exercício 07: Valor inválido =(');
+};
+
+form.addEventListener('submit', handleSubmit);
+
 /*
   02
 
@@ -19,6 +59,12 @@
   - Exiba no console o boolean no qual este teste resulta.
 */
 
+const p = document.querySelector('p');
+const regex = /documentation/;
+const result = regex.test(p.textContent);
+
+console.log('Exercício 3: ', result);
+
 /*
   04
 
@@ -27,7 +73,12 @@
   - Teste se o match aconteceu e exiba o resultado no console.
 */
 
-const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
+const B99message =
+    'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta';
+const B99Regex = /[A-Z0-9]{3}/;
+const B99Result = B99Regex.test(B99message);
+
+console.log('Exercício 4: ', B99Result);
 
 /*
   05
@@ -36,11 +87,12 @@ const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 
     resultado do teste entre a regex e a string exibido no console seja true.
 */
 
-const word = 'O que a NASA fotografou no dia do seu aniversário?'
-const NASARegex = /^[A-Z]{4}$/
-const NASAResult = NASARegex.test(word)
+const word = 'NASA';
+// const word = 'O que a NASA fotografou no dia do seu aniversário?';
+const NASARegex = /^[A-Z]{4}$/;
+const NASAResult = NASARegex.test(word);
 
-console.log(NASAResult)
+console.log('Exercício 5: ', NASAResult);
 
 /*
   06
