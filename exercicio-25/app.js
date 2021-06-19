@@ -6,19 +6,21 @@
 */
 
 const months = [
-  'Janeiro',
-  'Fevereiro',
-  'Março',
-  'Abril',
-  'Maio',
-  'Junho',
-  'Julho',
-  'Agosto',
-  'Setembro',
-  'Outubro',
-  'Novembro',
-  'Dezembro'
-]
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+];
+
+console.log('1o exercise: ', months.indexOf('Fevereiro'));
 
 /*
   02
@@ -27,11 +29,16 @@ const months = [
   - Exiba o objeto no console.
 */
 
+const present = new Date();
+console.log({ present });
+
 /*
   03
 
   - Baseado no objeto que você acabou de criar, exiba o ano atual no console.
 */
+
+console.log(present.getFullYear());
 
 /*
   04
@@ -40,11 +47,16 @@ const months = [
   - Exiba o objeto no console.
 */
 
+const past = new Date('jul 30 1984 6:00');
+console.log({ past });
+
 /*
   05
 
   - Exiba, no console, a hora do objeto que você acabou de criar.
 */
+
+console.log('5o exercise: ', past.getHours());
 
 /*
   06
@@ -53,11 +65,18 @@ const months = [
   - Exiba o objeto no console.
 */
 
+const future = new Date('2021/07/30 6:15:00');
+console.log({ future });
+
 /*
   07
 
   - Exiba no console a quantidade de dias entre o momento futuro e o passado.
 */
+
+const difference = future.getTime() - past.getTime();
+const differenceInDays = Math.round(difference / 1000 / 60 / 60 / 24);
+console.log({ differenceInDays });
 
 /*
   08
