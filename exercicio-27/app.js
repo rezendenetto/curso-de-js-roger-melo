@@ -4,17 +4,19 @@
   - Implemente um código assíncrono entre os console.log() abaixo.
 */
 
-console.log('Linha 1')
-console.log('Linha 2')
-console.log('Linha 3')
-console.log('Linha 4')
+console.log('Linha 1');
+console.log('Linha 2');
+console.log('Linha 3');
+console.log('Linha 4');
 
+setTimeout(() => {
+    console.log('EXERCÍCIO 01: Função de callback executada');
+}, 2000);
 
-
-console.log('Linha 5')
-console.log('Linha 6')
-console.log('Linha 7')
-console.log('Linha 8')
+console.log('Linha 5');
+console.log('Linha 6');
+console.log('Linha 7');
+console.log('Linha 8');
 
 /*
   02
@@ -23,11 +25,17 @@ console.log('Linha 8')
     "logGreeting" ser exibida no console.
 */
 
-function logGreeting (name) {
-  console.log(`olá, ${name}`)
+function logGreeting(name) {
+    console.log(`olá, ${name}`);
 }
 
-// x(logGreeting)
+// x(logGreeting);
+//---
+const x = callback => {
+    callback('Rezende');
+};
+
+x(logGreeting);
 
 /*
   03
@@ -35,10 +43,13 @@ function logGreeting (name) {
   - O código abaixo possui uma parte que pode ser isolada. Isole-a.
 */
 
-const numbers = [3, 4, 10, 20]
-const lesserThanFive = numbers.filter(num => num < 5)
+const numbers = [3, 4, 10, 20];
+// const lesserThanFive = numbers.filter(num => num < 5);
+//---
+const getLessThanFive = num => num < 5; // usar get pra nomear funções e isLessThanFive pra condições de ifs
+const lesserThanFive = numbers.filter(getLessThanFive);
 
-console.log(lesserThanFive)
+console.log(lesserThanFive);
 
 /*
   04
@@ -46,14 +57,18 @@ console.log(lesserThanFive)
   - Refatore o código abaixo.
 */
 
-const prices = [12, 19, 7, 209]
-let totalPrice = 0
+const prices = [12, 19, 7, 209];
+let totalPrice = 0;
 
-for (let i = 0; i < prices.length; i++) {
-  totalPrice += prices[i]
-}
+// for (let i = 0; i < prices.length; i++) {
+//     totalPrice += prices[i];
+// }
+//--
+const getTotalPrice = (acc, price) => acc + price;
 
-console.log(`Preço total: ${totalPrice}`)
+totalPrice = prices.reduce(getTotalPrice, 0);
+
+console.log(`Preço total: ${totalPrice}`);
 
 /*
   05
@@ -62,7 +77,19 @@ console.log(`Preço total: ${totalPrice}`)
   - Não insira `car.color = azul`.
 */
 
-let car = { color: 'amarelo' }
+let car = { color: 'amarelo' };
+
+car['color'] = 'azul';
+
+console.log(car);
+
+// ou resolver usando o fato de objetos serem tipo referencia
+
+let secondCar = car;
+
+secondCar.color = 'preto';
+
+console.log(car, secondCar);
 
 /*
   06
@@ -73,6 +100,17 @@ let car = { color: 'amarelo' }
   - Se todos os argumentos forem passados, retorne a string 'A função foi 
     invocada com 3 argumentos'.
 */
+
+const myFunc = (param1, param2, param3) => {
+    //prettier-ignore
+    const isSomeParameterUndefined = [param1, param2, param3].includes(undefined)
+
+    return isSomeParameterUndefined
+        ? 'A função deve ser invocada com 3 argumentos'
+        : 'A função foi invocada com 3 argumentos';
+};
+
+console.log(myFunc('teste', [], {}));
 
 /*
   07
@@ -97,6 +135,102 @@ let car = { color: 'amarelo' }
 */
 
 let booksBox = {
-  spaces: 5,
-  booksIn: 0
-}
+    spaces: 5,
+    booksIn: 0,
+};
+
+// 1o PASSO:
+/*
+// Como esse objeto booksBox não contem nenhum método addBooks essa atribuição vai criar o método addBooks no objeto booksBox
+booksBox.addBooks = () => {
+    console.log(booksBox); // vai referenciar o objeto que ela armazena
+    console.log(this); // vai referenciar o window, arrow functions não se conectam com this da mesma forma que uma function declaration, pois não possuem um this próprio, o valor desse this vai ser herdado do this do escopo que envolve a declaração da arrow function
+    // obs.:
+    // - dentro dessa função tenho duas opções de acessar o booksBox, usando a própria referencia dele, que a 'let' na qual ele foi armazenado, ou usando o 'this'
+    // - sempre que possível evite usar o 'this', é melhor
+};
+
+booksBox.addBooks();
+*/
+
+// 2o PASSO:
+/*
+booksBox.addBooks = booksQuantity => {
+    if (booksBox.booksIn === booksBox.spaces) {
+        return 'A caixa já está cheia';
+    }
+
+    if (booksBox.booksIn + booksQuantity > booksBox.spaces) {
+        const availableSpaces = booksBox.spaces - booksBox.booksIn;
+
+        const fitPluralOrSingular = availableSpaces === 1 ? 'cabe' : 'cabem';
+        const bookPluralOrSingular = availableSpaces === 1 ? 'livro' : 'livros'; // fitPluralOrSingular, não tem problema ser o mesmo nome, escopo de blocos diferentes
+
+        // return `Só cabem mais ${booksBox.spaces - booksBox.booksIn} livros`;
+        return `Só ${fitPluralOrSingular} mais ${availableSpaces} ${bookPluralOrSingular}`;
+    }
+
+    booksBox.booksIn += booksQuantity;
+
+    const bookPluralOrSingular = booksBox.booksIn === 1 ? 'livro' : 'livros'; // fitPluralOrSingular, não tem problema ser o mesmo nome, escopo de blocos diferentes
+    return `Já há '${booksBox.booksIn}' ${bookPluralOrSingular} na caixa`;
+};
+
+console.log(booksBox.addBooks(2));
+
+console.log(booksBox);
+*/
+
+//3o PASSO: Refatorando a repetição dos ternários
+
+const getSingularOrPlural = (quantity, singular, plural) => {
+    return quantity === 1 ? singular : plural;
+};
+
+const getAvailableSpacesMessage = (spaces, booksIn) => {
+    const availableSpaces = spaces - booksIn; // Atenção: TIRAR O books.Box.spaces e o booksBox.booksIn
+
+    //prettier-ignore
+    const fitPluralOrSingular = 
+          getSingularOrPlural(availableSpaces,'cabe', 'cabem');
+    //prettier-ignore
+    const bookPluralOrSingular = 
+          getSingularOrPlural(availableSpaces,'livro', 'livros');
+
+    return `Só ${fitPluralOrSingular} mais ${availableSpaces} ${bookPluralOrSingular}`;
+};
+
+booksBox.addBooks = booksQuantity => {
+    const isBoxFilled = booksBox.booksIn === booksBox.spaces;
+    const boxSpacesAreNotEnough =
+        booksBox.booksIn + booksQuantity > booksBox.spaces;
+
+    if (isBoxFilled) {
+        return 'A caixa já está cheia';
+    }
+
+    if (boxSpacesAreNotEnough) {
+        return getAvailableSpacesMessage(booksBox.spaces, booksBox.booksIn); // Atenção: PASSAR OS ARGUMENTOS como books.Box.spaces e o booksBox.booksIn
+    }
+
+    booksBox.booksIn += booksQuantity;
+
+    //prettier-ignore
+    const bookPluralOrSingular = 
+      getSingularOrPlural(booksBox.booksIn, 'livro', 'livros');
+
+    return `Já há '${booksBox.booksIn}' ${bookPluralOrSingular} na caixa`;
+};
+
+// console.clear();
+
+console.log(booksBox.addBooks(0)); // obs.: precisa mudar a condição pra <= 1 pra que pegue o 0 livro
+console.log(booksBox.addBooks(2));
+console.log(booksBox.addBooks(1));
+console.log(booksBox.addBooks(25));
+console.log(booksBox.addBooks(1));
+console.log(booksBox.addBooks(25));
+console.log(booksBox.addBooks(1));
+console.log(booksBox.addBooks(25));
+
+console.log(booksBox);
