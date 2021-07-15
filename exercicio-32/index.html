@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./style.css">
   <title>Testando a API do GIPHY</title>
 </head>
+
 <body>
   <h1>Testando a API do GIPHY</h1>
 
+  <!-- DICA: 
+  ID usado só em label/input e como ancora
+  class usado só quando queremos estilizar o elemento no CSS
+  data-js='identificação', é o atributo que utilizamos quando queremos usar o elemento no Javascript
+  -->
+
   <main>
-    <form>
-      <input id="search" type="search" autofocus />
+    <form data-js='search-form'>
+      <!-- caso existisse mais de um form, eu iria identificar com data-js -->
+      <input id="search" name="search" type="search" autofocus />
+      <!-- Evitar usar IDs pra identificar elementos, já que ele cria como efeito colateral variáveis globais -->
+      <!-- obs.: IDs serão usados em apenas dois casos: ID tag label/input e ID como ancora do site -->
+      <!-- usar value='party' no input pra não ter que sempre digitar algo pra testar -->
       <button id="btnSearch">Buscar</button>
     </form>
-    
+
     <div class="out"></div>
+    <!-- Apagar a class='out', usar classes só quando realmente for estilizar os elementos no CSS -->
   </main>
-  
+
   <script src="./app.js"></script>
 </body>
+
 </html>
