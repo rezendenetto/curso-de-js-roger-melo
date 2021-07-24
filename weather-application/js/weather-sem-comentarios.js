@@ -16,7 +16,7 @@ const getCityData = async cityName => {
 
         return cityData;
     } catch ({ name, message }) {
-        alert(`${name}: ${error}`);
+        alert(`${name}: ${message}`);
     }
 };
 
@@ -34,7 +34,7 @@ const getCityWeather = async cityName => {
         debugger;
         return cityWeatherData;
     } catch ({ name, message }) {
-        alert(`${name}: ${error}`);
+        alert(`${name}: ${message}`);
     }
 };
 

@@ -1,21 +1,26 @@
+// CÓDIGO QUE INTERAGE COM A API
+
 const APIKey = 'OBFDwL3Pq3cOgKpRXH8VsJA38kI60M47';
-const baseUrl = 'http://dataservice.accuweather.com/'; // util pra diminuir o tamanho da linha da string e as repetições desnecessária
+const baseUrl = 'http://dataservice.accuweather.com/';
 
 // padronização do código, obtendo as url através de funções
 const getCityUrl = cityName =>
     `${baseUrl}/locations/v1/cities/search?apikey=${APIKey}&q=${cityName}`;
 
-const getWeatherUrl = ({ Key }) =>
-    `${baseUrl}/currentconditions/v1/${Key}?apikey=${APIKey}&language=pt-br`;
+// const getWeatherUrl = ({ Key }) =>
+//     `${baseUrl}/currentconditions/v1/${Key}?apikey=${APIKey}&language=pt-br`;
+
+// ***função ajustada***
+const getWeatherUrl = cityKey =>
+    `${baseUrl}/currentconditions/v1/${cityKey}?apikey=${APIKey}&language=pt-br`;
 
 // FUNÇÃO GENÉRICA PRA FAZER REQUESTS
 const fetchData = async url => {
     try {
-        // console.log('kkkkkkkkkk'); // pra verificar que o try está sendo executado no caso de erro também
         const response = await fetch(url);
 
         if (!response.ok) {
-            throw new Error('Não foi possível obter os dados'); // se error, não vai retornar valor e função que não retorna valor, retorna undefined
+            throw new Error('Não foi possível obter os dados');
         }
 
         return await response.json();
@@ -24,40 +29,17 @@ const fetchData = async url => {
     }
 };
 
-const getCityData = cityName => fetchData(getCityUrl(cityName)); // fetchData retorna uma promise já que toda função async retorna uma promise
-
-const getCityWeather = async cityName => {
-    // transformar a função em async pra poder usar o await
-    const [cityData] = await getCityData(cityName); // não recebe mais um objeto e sim um array de objetos agora
-
-    return fetchData(getWeatherUrl(cityData));
-};
-
-getCityData('curitiba').then(console.log); // estou passando uma função de callback como argumento do then, por isso que funciona
-getCityData('curitiba').then(value => console.log({ value })); // pra verificar que o undefined que estava aparecendo no console em caso de erro é o retorno da função fetchData, que devido ao throw não teve seu return logo abaixo executado e função que não retorna um valor retorna undefined
-
-getCityWeather('recife').then(console.log);
-
-// -----------------------------------------------------------------------------
-
-// CÓDIGO ANTIGO
+const getCityData = cityName => fetchData(getCityUrl(cityName));
 
 // const getCityWeather = async cityName => {
-//     try {
-//         const { Key } = await getCityData(cityName);
-//         const cityWeatherUrl = `http://dataservice.accuweather.com/currentconditions/v1/${Key}?apikey=${APIKey}&language=pt-br`;
-//         const response = await fetch(cityWeatherUrl);
+//     const [cityData] = await getCityData(cityName);
 
-//         if (!response.ok) {
-//             throw new Error('Não foi possível obter os dados');
-//         }
-
-//         const [cityWeatherData] = await response.json();
-//         debugger;
-//         return cityWeatherData;
-//     } catch ({ name, message }) {
-//         alert(`${name}: ${error}`);
-//     }
+//     return fetchData(getWeatherUrl(cityData));
 // };
 
-// getCityWeather('fortaleza');
+// ***função ajustada***
+// OBS.: só vai valer a pena usar o await quando eu for invocar essa função, já que ela vai sempre ter que retornar uma promise mesmo
+const getCityWeather = cityKey => fetchData(getWeatherUrl(cityKey));
+// ctrl + click na função pra ir até a declaração dela ou ctrl + alt + click pra abrir a declaração da função numa aba lateral
+
+// getCityWeather('recife').then(console.log); // não vou precisar mais, era apenas teste

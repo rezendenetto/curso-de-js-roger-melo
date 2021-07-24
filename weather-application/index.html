@@ -20,21 +20,29 @@
       <input class="form-control p-4" type="text" name="city" placeholder="Ex: Miami" autofocus>
     </form>
 
-    <div class="card shadow-lg rounded">
+    <!-- olha o nome da class no browser e depois pesquisar aqui com ctrl + f -->
+    <!-- inserir data-js -->
+    <!-- inserir class d-none -->
+    <div data-js="city-card" class="card d-none shadow-lg rounded">
       <!-- imagem estática que será substituída por um svg dinâmico -->
       <img data-js="time" src="https://via.placeholder.com/400x300" class="card-img-top">
 
-      <div data-js="time-icon" class="bg-light mx-auto text-center"></div>
+      <!-- adicionar um img que representa o clima -->
+      <!-- adicionar uma class time-icon pra podermos estilizar o elemento -->
+      <div data-js="time-icon" class="time-icon bg-light mx-auto text-center"></div>
 
       <div data-js="weather-details" class="text-muted text-uppercase text-center">
-        <h5 class="my-3">Nome da Cidade</h5>
 
-        <div class="my-3">Clima</div>
+        <h5 data-js="city-name" class="my-3">Nome da Cidade</h5> <!-- inserir data-js -->
 
-        <div class="display-4 my-4">
+        <div data-js="city-weather" class="my-3">Clima</div> <!-- inserir data-js -->
+
+        <div data-js="city-temperature" class="display-4 my-4">
+          <!-- inserir data-js -->
           <span>00</span>
           <span>&deg;C</span>
         </div>
+
       </div>
     </div>
   </div>
