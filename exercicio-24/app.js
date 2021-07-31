@@ -32,13 +32,15 @@ console.log(numbers.includes(65));
   03
 
   - Refatore a implementação da remoção do to-do (li) da tela;
-  - Tente implementar essa remoção sem "navegar pelo DOM" usando propriedades
-    como a parentElement.
+  - Tente implementar essa remoção sem "navegar pelo DOM". Ou seja, sem usar 
+    propriedades como a parentElement.
     
     Por que? 
 
     Se futuramente a marcação HTML da aplicação mudar, se o parentElement mudar, 
     o código que foi implementado na aula não funcionará.
+    
+    Dica: pesquise por dataset.
 */
 
 /*
